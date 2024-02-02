@@ -17,7 +17,7 @@ if (!dbUrl) {
 mongoose
   .connect(dbUrl)
   .then(() => {
-   logger.info("DB_URL not defined in environment variables.");
+    logger.info("Connected to MongoDB!");
   })
   .catch(() => {
     console.error("Failed to connect!");
