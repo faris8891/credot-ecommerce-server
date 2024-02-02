@@ -7,7 +7,7 @@ import {
   registerUser,
 } from "./controller.js";
 
-export const userRouter = express.Router();
+export const  userRouter= express.Router();
 
 userRouter.route("/user").post(tryCatch(registerUser)).get(tryCatch(getUser));
 

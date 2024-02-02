@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 
 import { userRouter } from "./apps/users/route.js";
 import { morganMiddleware } from "./middlewares/morganMiddleware.js";
+import { categoriesRouter } from "./apps/category/route.js";
 
 dotenv.config();
 
@@ -33,5 +34,6 @@ app.use(express.json());
 
 // write route here
 app.use("/api/users", userRouter);
+app.use("/api", categoriesRouter);
 
 app.use(errorHandler);
