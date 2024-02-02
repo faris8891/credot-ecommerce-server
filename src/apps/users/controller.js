@@ -23,7 +23,7 @@ export async function registerUser(req, res) {
 export async function getUser(req, res) {
   const { userId } = req.body;
   const user = await findUserDB(userId);
-  return res.status(201).json({
+  return res.status(200).json({
     status: status.SUCCESS,
     message: "user fetch successful.",
     data: {
@@ -50,7 +50,7 @@ export async function getAllAddress(req, res) {
   const filters = { user: userId };
   const newAddress = await findAddressesDB(filters);
 
-  return res.status(201).json({
+  return res.status(200).json({
     status: status.SUCCESS,
     message: "add address successful.",
     data: {
