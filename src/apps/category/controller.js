@@ -18,9 +18,9 @@ export async function getAllCategories(req, res) {
   const filters = { isDeleted: false };
   const allCategories = await getAllCategoriesDB(filters);
 
-  return res.status(201).json({
+  return res.status(200).json({
     status: status.SUCCESS,
-    message: "create category successful.",
+    message: "fetch categories successful.",
     data: {
       categories: allCategories,
     },
