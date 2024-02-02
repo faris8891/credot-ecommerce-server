@@ -4,13 +4,17 @@ import cors from "cors";
 import errorHandler from "./middlewares/errorHandler.js";
 import logger from "./libs/winstonLogger.js";
 import dotenv from "dotenv";
+
+import { userRouter } from "./apps/users/route.js";
+import { morganMiddleware } from "./middlewares/morganMiddleware.js";
+
 dotenv.config();
 
 export const app = express();
 const dbUrl = process.env.DB_URL;
 
 if (!dbUrl) {
-    logger.error("DB_URL not defined in environment variables.");
+  logger.error("DB_URL not defined in environment variables.");
   process.exit(1);
 }
 
@@ -24,8 +28,10 @@ mongoose
   });
 
 app.use(cors());
+app.use(morganMiddleware);
 app.use(express.json());
 
 // write route here
+app.use("/api/users", userRouter);
 
 app.use(errorHandler);

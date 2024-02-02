@@ -1,5 +1,5 @@
 import morgan from "morgan";
-import logger from "../libs/winstonLogger";
+import logger from "../libs/winstonLogger.js";
 
 // Override the stream method by telling
 // Morgan to use our custom logger instead of console.log.
@@ -20,7 +20,7 @@ const skip = () => {
 };
 
 // Build the morgan middleware
-const morganMiddleware = morgan(
+export const morganMiddleware = morgan(
   // Define message format string (this is the default one).
   // The message format is made from tokens, and each token is
   // defined inside the Morgan library.
@@ -32,4 +32,3 @@ const morganMiddleware = morgan(
   // { stream }
 );
 
-module.exports = morganMiddleware;
