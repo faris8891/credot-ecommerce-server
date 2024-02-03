@@ -22,7 +22,12 @@ export async function registerUser(req, res) {
 
 export async function getUser(req, res) {
   const { userId } = req.body;
-  const user = await findUserDB(userId);
+  const filters = {
+    _id: userId,
+  };
+
+  const select = { password: 0 };
+  const user = await findUserDB(filters, select);
   return res.status(200).json({
     status: status.SUCCESS,
     message: "user fetch successful.",
