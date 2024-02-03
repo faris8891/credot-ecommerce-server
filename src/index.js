@@ -9,6 +9,7 @@ import { userRouter } from "./apps/users/route.js";
 import { morganMiddleware } from "./middlewares/morganMiddleware.js";
 import { categoriesRouter } from "./apps/category/route.js";
 import { productsRouter } from "./apps/products/route.js";
+import { authRouter } from "./apps/auth/route.js";
 
 dotenv.config();
 
@@ -37,5 +38,6 @@ app.use(express.json());
 app.use("/api/users", userRouter);
 app.use("/api", categoriesRouter);
 app.use("/api", productsRouter);
+app.use("/api/auth", authRouter);
 
 app.use(errorHandler);
