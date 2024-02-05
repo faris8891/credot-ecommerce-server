@@ -7,6 +7,6 @@ export const categoriesRouter = express.Router();
 
 categoriesRouter
   .route("/categories")
-  .post(tryCatch(createCategory))
+  .post(jwtAuth,tryCatch(createCategory))
   .get(tryCatch(getAllCategories));
-   
+  
