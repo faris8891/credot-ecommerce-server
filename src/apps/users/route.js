@@ -13,9 +13,9 @@ export const userRouter = express.Router();
 userRouter
   .route("/user")
   .post(tryCatch(registerUser))
-  .get(jwtAuth, tryCatch(getUser));
+  .get( tryCatch(getUser));
 
 userRouter
   .route("/address")
-  .post(jwtAuth, tryCatch(addAddress))
-  .get(jwtAuth, tryCatch(getAllAddress));
+  .post( tryCatch(addAddress))
+  .get( tryCatch(getAllAddress));

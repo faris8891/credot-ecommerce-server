@@ -5,7 +5,8 @@ import AppError from "./AppError.js";
 dotenv.config();
 
 export function jwtAuth(req, res, next) {
-  const jwt_key = process.env.JWT_KEY;
+  try {
+    const jwt_key = process.env.JWT_KEY;
   const authHeader = req.headers.authorization;
   if (!authHeader) {
     throw new AppError(401, "Unauthorized ❗");
@@ -18,4 +19,9 @@ export function jwtAuth(req, res, next) {
     req.userId = decoded?.id;
     next();
   });
+  } catch (error) {
+    
+  }
+  
 }
+ 

@@ -7,5 +7,5 @@ export const cartRouter = express.Router();
 
 cartRouter
   .route("/cart")
-  .post(jwtAuth, tryCatch(addToCart))
-  .get(jwtAuth, tryCatch(getCart));
+  .post( tryCatch(addToCart))
+  .get( tryCatch(getCart));
