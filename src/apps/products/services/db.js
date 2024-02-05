@@ -6,8 +6,12 @@ export async function createProductsDB(data) {
   return newProduct;
 }
 
-export async function getAllProductsDB(filters) {
-  const products = await productsModel.find(filters);
+export async function getAllProductsDB(filters, limit = 15) {
+  const products = await productsModel
+    .find(filters)
+    .populate("category")
+    .sort({ createdAt: -1 })
+    .limit(limit);
   return products;
 }
 

@@ -1,4 +1,6 @@
 import { status } from "../../constant/status.js";
+import { handleUpload } from "../../helpers/fileUploader.js";
+import { createProduct } from "./services/common.js";
 import {
   createProductsDB,
   getAllProductsDB,
@@ -6,9 +8,18 @@ import {
 } from "./services/db.js";
 
 export async function addProducts(req, res) {
-  const newProduct = req.body;
+  const userId = req.userId;
+  const data = req.body;
+  const b64 = Buffer.from(req.files[0].buffer).toString("base64");
+  let dataURI = "data:" + req.files[0].mimetype + ";base64," + b64;
+  const cloudinaryRes = await handleUpload(dataURI, "Credot/products");
 
-  const product = await createProductsDB(newProduct);
+  const createdProduct = await createProduct(
+    userId,
+    data,
+    cloudinaryRes.secure_url
+  );
+  const product = await createProductsDB(createdProduct);
 
   return res.status(201).json({
     status: status.SUCCESS,
@@ -20,8 +31,10 @@ export async function addProducts(req, res) {
 }
 
 export async function getAllProducts(req, res) {
+  const { limit, category } = req.query;
   const filters = { isDeleted: false };
-  const products = await getAllProductsDB(filters);
+  category ? (filters.category = category) : null;
+  const products = await getAllProductsDB(filters, limit);
 
   return res.status(200).json({
     status: status.SUCCESS,

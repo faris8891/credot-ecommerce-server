@@ -6,12 +6,16 @@ import {
   getUser,
   registerUser,
 } from "./controller.js";
+import { jwtAuth } from "../../middlewares/auth.js";
 
-export const  userRouter= express.Router();
+export const userRouter = express.Router();
 
-userRouter.route("/user").post(tryCatch(registerUser)).get(tryCatch(getUser));
+userRouter
+  .route("/user")
+  .post(tryCatch(registerUser))
+  .get(jwtAuth, tryCatch(getUser));
 
 userRouter
   .route("/address")
-  .post(tryCatch(addAddress))
-  .get(tryCatch(getAllAddress));
+  .post(jwtAuth, tryCatch(addAddress))
+  .get(jwtAuth, tryCatch(getAllAddress));

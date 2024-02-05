@@ -10,11 +10,14 @@ import { morganMiddleware } from "./middlewares/morganMiddleware.js";
 import { categoriesRouter } from "./apps/category/route.js";
 import { productsRouter } from "./apps/products/route.js";
 import { authRouter } from "./apps/auth/route.js";
+import { cloudinaryConfig } from "./bin/cludinaryConfig.js";
+import { cartRouter } from "./apps/cart/route.js";
 
 dotenv.config();
 
 export const app = express();
 const dbUrl = process.env.DB_URL;
+cloudinaryConfig();
 
 if (!dbUrl) {
   logger.error("DB_URL not defined in environment variables.");
@@ -38,6 +41,7 @@ app.use(express.json());
 app.use("/api/users", userRouter);
 app.use("/api", categoriesRouter);
 app.use("/api", productsRouter);
+app.use("/api", cartRouter);
 app.use("/api/auth", authRouter);
 
 app.use(errorHandler);

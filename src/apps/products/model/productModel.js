@@ -4,10 +4,14 @@ const productsSchema = new Schema(
   {
     name: {
       type: String,
-      unique: true,
       trim: true,
       lowercase: true,
       required: true,
+    },
+    sellerId: {
+      type: mongoose.Types.ObjectId,
+      required: true,
+      ref: "users",
     },
     price: {
       type: Number,
