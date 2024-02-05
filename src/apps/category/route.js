@@ -9,4 +9,4 @@ categoriesRouter
   .route("/categories")
   .post(jwtAuth,tryCatch(createCategory))
   .get(tryCatch(getAllCategories));
-  
+   

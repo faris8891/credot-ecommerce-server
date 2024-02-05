@@ -11,7 +11,8 @@ export async function getAllProductsDB(filters, limit = 15) {
     .find(filters)
     .populate("category")
     .sort({ createdAt: -1 })
-    .limit(limit);
+    .limit(limit)
+    .skip(0);
   return products;
 }
 
