@@ -8,7 +8,7 @@ export const productsRouter = express.Router();
 
 productsRouter
   .route("/products")
-  .post( upload.array("file"), tryCatch(addProducts))
+  .post( upload.array("file"),jwtAuth, tryCatch(addProducts))
   .get(tryCatch(getAllProducts));
 
 productsRouter.route("/products/:productId").get(tryCatch(getProduct));
