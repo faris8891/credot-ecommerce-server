@@ -18,3 +18,10 @@ export async function getCartItemsDB(filter) {
   const cart = await cartModel.find(filter).populate("productId");
   return cart;
 }
+
+export async function updateCartDB(cartId, value) {
+  const cartItem = cartModel.findByIdAndUpdate(cartId, {
+    $set: { quantity: value },
+  });
+  return cartItem;
+}

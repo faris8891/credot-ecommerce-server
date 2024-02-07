@@ -6,13 +6,13 @@ export async function createProductsDB(data) {
   return newProduct;
 }
 
-export async function getAllProductsDB(filters, limit = 15) {
+export async function getAllProductsDB(filters, limit = 15, skip=0) {
   const products = await productsModel
     .find(filters)
     .populate("category")
     .sort({ createdAt: -1 })
     .limit(limit)
-    .skip(0);
+    .skip(skip);
   return products;
 }
 

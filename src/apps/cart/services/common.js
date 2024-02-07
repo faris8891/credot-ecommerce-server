@@ -7,8 +7,9 @@ import {
 } from "./db.js";
 
 export async function createCart(userId, cartItem) {
+
   const filter = {
-    _id: cartItem.productId,
+    _id: cartItem.productId ||cartItem._id,
   };
 
   const product = await getProductsDB(filter);
@@ -21,8 +22,8 @@ export async function createCart(userId, cartItem) {
     const item = {
       userId: userId,
       sellerId: product.sellerId,
-      productId: cartItem.productId,
-      quantity: 1,
+      productId: cartItem.productId || cartItem._id,
+      quantity: cartItem.quantity || 1,
     };
     await createCartItemDB(item);
   } else {
