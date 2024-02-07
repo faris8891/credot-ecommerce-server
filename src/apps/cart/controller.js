@@ -1,5 +1,6 @@
 import { status } from "../../constant/status.js";
 import { createCart, getCartItems } from "./services/common.js";
+import { updateCartDB } from "./services/db.js";
 
 export async function addToCart(req, res) {
   const cartItem = req.body;
@@ -21,4 +22,11 @@ export async function getCart(req, res) {
       cart: cart,
     },
   });
+}
+
+export async function updateQuantity(req, res) {
+  const userId = req.userId;
+  const { data, id } = req.body;
+
+  const update = updateCartDB(id, data);
 }
